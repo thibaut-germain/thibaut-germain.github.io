@@ -13,4 +13,4 @@ author_profile: true
 
 ## Undergraduate
 - Romain Delaunay and Hugo Gaible, L3 ENS Paris Saclay, April-June 2023, co-supervised with Alexandre Bois and Laurent Oudre, on *"Convolutional dictionnay learning"*. 
-- Willians Ramos and Oussama Zekri, L3 ENS Paris Saclay, April-June 2022, co-supervised with Laurent Oudre, on *"Optimal transport and elastic measures on time series"*.  
+- William Ramos and Oussama Zekri, L3 ENS Paris Saclay, April-June 2022, co-supervised with Laurent Oudre, on *"Optimal transport and elastic measures on time series"*.  

@@ -5,6 +5,9 @@ permalink: /students/
 author_profile: true
 ---
 
+## PhD
+- Valerio Guerrini, 2024 - , co-supervised with Charles TRUONG and Laurent OUDRE, on *"Unsupervised approaches for constructing semantic summaries from physiological signals. Application to behavioral study"*.   
+
 
 ## Graduate
 - Valerio Guerrini, M2 MVA, April-September 2024, co-supervised with Charles Truong and Laurent Oudre, on *"Benchmark for motif discovery in time series"*. 

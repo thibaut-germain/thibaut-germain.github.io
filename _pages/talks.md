@@ -7,7 +7,8 @@ author_profile: true
 
 {% include base_path %}
 
-
+- "Detection and statistical analysis of temporal pattern" ([R&D cognition day](https://www.institut-cognition.com/journees-rt-cognition-28-janvier-2025/), January 2025)
+- "Interactive discovery of temporal motifs, a web application" ([ECML PKDD](https://ecmlpkdd.org/2024/), September 2024).
 - "Shape analysis & machine learning for time series", ([Duke University](https://duke.edu), July 2024). [<a href="https://thibaut-germain.github.io/files/talks/Duke_visiting.pdf">pdf</a>] 
 - "Persistence-based Motifs Discovery in Time Series", ([Centre Borelli](https://centreborelli.ens-paris-saclay.fr/en), June 2024). [<a href="https://thibaut-germain.github.io/files/talks/MLDMA_25_06_2024.pdf">pdf</a>] 
 - "Linear-trend normalization for multivariate subsequence similarity search", ([ICDE 2024](https://icde2024.github.io), May 2024). [<a href="https://thibaut-germain.github.io/files/talks/ICDE2024_lt_distance.pdf">pdf</a>] 

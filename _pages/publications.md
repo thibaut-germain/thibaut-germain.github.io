@@ -16,6 +16,10 @@ author_profile: true
 <ol>
 
   <li>
+    Guerrini, V., Germain, T., Truong, C.,  Oudre, L, & Boniol, P. (2025). Time Series Motif Discovery: A Comprehensive Evaluation. Proceedings of the VLDB Endowment. [<a href="https://tsmd.readthedocs.io/en/latest/index.html">python package</a>][<a href="https://github.com/grrvlr/TSMD">github</a>][<a href="https://thibaut-germain.github.io/files/papers/MD_benchmark.pdf">pdf</a>] 
+  </li>
+
+  <li>
     Germain, T., Truong, C., & Oudre, L. (2024). Persistence-Based Motif Discovery in Time Series. IEEE Transactions on Knowledge and Data Engineering. [<a href="https://ieeexplore.ieee.org/abstract/document/10568370">link</a>][<a href="https://github.com/thibaut-germain/Persistent-Pattern-Discovery">github</a>][<a href="https://thibaut-germain.github.io/files/papers/persistent_dattern_discovery.pdf">pdf</a>] 
   </li>
 
@@ -31,7 +35,11 @@ author_profile: true
 <ol>
 
   <li>
-    Germain, T., Gruffaz, S., Truong, C., Durmus, A., & Oudre, L. (2024, August). Shape analysis for time series. In 2024 38th Annual Conference on Neural Information Processing Systems (NeurIPS). [<a href="https://openreview.net/forum?id=JM0IQSliol">link</a>][<a href="https://github.com/thibaut-germain/TSLDDMM">github</a>][<a href="https://thibaut-germain.github.io/files/papers/shape_analysis_for_time_series.pdf">pdf</a>]
+    Germain, T., Kosma, C., & Oudre, L. (2025). Time series representations with hard-coded invariances. In the 42nd International Conference on Machine Learning (ICML). [<a href="https://thibaut-germain.github.io/files/papers/invconv.pdf">pdf</a>]
+  </li>
+
+  <li>
+    Germain, T., Gruffaz, S., Truong, C., Durmus, A., & Oudre, L. (2024). Shape analysis for time series. In 38th Annual Conference on Neural Information Processing Systems (NeurIPS). [<a href="https://openreview.net/forum?id=JM0IQSliol">link</a>][<a href="https://github.com/thibaut-germain/TSLDDMM">github</a>][<a href="https://thibaut-germain.github.io/files/papers/shape_analysis_for_time_series.pdf">pdf</a>]
   </li>
 
   <li>
@@ -48,6 +56,13 @@ author_profile: true
 
 </ol>
 
+## PhD Thesis
+<ol>
+<li>
+  Germain, T. “Pattern detection and shape analysis for physiological timeseries”. PhD thesis. Université Paris-Saclay, 2024. [<a href="https://thibaut-germain.github.io/files/papers/thesis.pdf">pdf</a>]
+</li>
+</ol>
+
 ## National conferences papers
 <ol>
   <li>
@@ -58,3 +73,4 @@ author_profile: true
     Germain, T., Truong, C., Oudre, L., & Krejci, E. (2022, September). Approches non-supervisées et non-linéaires pour l’analyse de signaux de pléthysmographie. In Proceedings of the Groupe de Recherche et d’Etudes En Traitement Du Signal et Des Images (GRETSI), Nancy, France, 2022. [<a href="https://gretsi.fr/data/colloque/pdf/2023_bois1380.pdf">link</a>]
   </li>
 </ol>
+

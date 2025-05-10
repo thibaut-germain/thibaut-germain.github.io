@@ -24,7 +24,7 @@ author:
   avatar           : "photo_identite.png"
   name             : "Thibaut Germain"
   pronouns         : # example: "she/her"  
-  bio              : "Postdoctoral researcher in ML for dynamical systems at CMAP Polytechnique"
+  bio              : "Postdoctoral researcher in machine learning for dynamical systems at CMAP Polytechnique"
   location         : "Paris, France"
   employer         : # "ENS Paris-Saclay"
   uri              : # URL

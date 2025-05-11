@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Welcome to Thibaut Germain’s webpage!"
+title: "Thibaut Germain"
 author_profile: true
 redirect_from: 
   - /about/

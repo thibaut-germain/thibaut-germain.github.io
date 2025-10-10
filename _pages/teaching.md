@@ -7,6 +7,10 @@ author_profile: true
 
 {% include base_path %}
 
+## Academic Year 2025-2026
+- Ecole Polytechnique - Statistics refresher - Graduate course - Teacher
+- Ecole Centrale Supélec - Python for data science - Graduate course - Teacher
+
 ## Academic Year 2023-2024
 - ENS Paris-Saclay - Mathematical statistics and machine learning - Graduate course - Teaching assistant (TD/TP)
 - ENS Paris-Saclay - Statistics for the french exam "Agrégation de mathématiques" - Graduate course - Teaching assistant (TD/TP)

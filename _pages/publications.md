@@ -31,7 +31,6 @@ author_profile: true
 
 ## International conferences papers
 
-
 <ol>
 
   <li>
@@ -54,6 +53,14 @@ author_profile: true
     Germain, T., Truong, C., Oudre, L., & Krejci, E. (2022, July). Unsupervised study of plethysmography signals through DTW clustering. In 2022 44th Annual International Conference of the IEEE Engineering in Medicine & Biology Society (EMBC) (pp. 3396-3400). IEEE.  [<a href="https://ieeexplore.ieee.org/abstract/document/9870907">link</a>][<a href="https://github.com/thibaut-germain/DCP_Clustering">github</a>][<a href="https://thibaut-germain.github.io/files/papers/embc2022_plethysmography.pdf">pdf</a>]
   </li>
 
+</ol>
+
+## Submited and preprint
+
+<ol>
+  <li>
+  T. Germain, R. Flamary, V. R. Kostic, K. Lounici, A Spectral-Grassmann Wasserstein metric for operator representations of dynamical systems (Submited), 2025. [<a href="https://web3.arxiv.org/abs/2509.24920">arXiv</a>][<a href="https://thibaut-germain.github.io/files/papers/sgot.pdf">pdf</a>]
+  </li>
 </ol>
 
 ## PhD Thesis

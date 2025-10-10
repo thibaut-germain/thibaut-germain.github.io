@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Thibaut Germain"
+title: "Welcome to Thibaut Germain' webpage!"
 author_profile: true
 redirect_from: 
   - /about/
@@ -9,7 +9,7 @@ redirect_from:
 # About me
 My research interests lie at the intersection of machine learning, geometry, and dynamical systems. More specifically, I focus on developing machine learning methods tailored to dynamical systems and time series, with a particular emphasis on the interpretability, comparison, and transport of dynamic behaviors.
 
-Since March 2025, I have been a postdoctoral researcher at [Centre de Mathématiques Appliquées de Polytechnique (CMAP)](https://cmap.ip-paris.fr), working with [Karim Lounici](http://www.cmapx.polytechnique.fr/~karim.lounici/) and [Rémi FLAMARY](\href{https://remi.flamary.com) on domain adaptation for stochastic dynamical systems through their transfer operators. 
+Since March 2025, I have been a postdoctoral researcher at [Centre de Mathématiques Appliquées de Polytechnique (CMAP)](https://cmap.ip-paris.fr), working with [Karim Lounici](http://www.cmapx.polytechnique.fr/~karim.lounici/) and [Rémi Flamary](\href{https://remi.flamary.com) on domain adaptation for stochastic dynamical systems through their transfer operators. 
 
 Before, I was PhD student at [Centre Borelli](https://centreborelli.ens-paris-saclay.fr/en), a research lab from [ENS Paris-Saclay](https://ens-paris-saclay.fr/en) under the supervision of [Charles Truong](https://charles.doffy.net) and [Laurent Oudre](http://www.laurentoudre.fr). I developed shape-based methods tailored for the discovery and statistical analysis of time series patterns with a particular focus on biomedical applications [<a href="https://thibaut-germain.github.io/files/papers/embc2022_plethysmography.pdf">thesis pdf</a>].
 

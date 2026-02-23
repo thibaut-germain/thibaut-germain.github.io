@@ -34,7 +34,11 @@ author_profile: true
 <ol>
 
   <li>
-    Germain, T., Kosma, C., & Oudre, L. (2025). Time series representations with hard-coded invariances. In the 42nd International Conference on Machine Learning (ICML). [<a href="https://thibaut-germain.github.io/files/papers/invconv.pdf">pdf</a>]
+    T. Germain, R. Flamary, V. R. Kostic, K. Lounici, A Spectral-Grassmann Wasserstein metric for operator representations of dynamical systems (ICLR), 2026. [<a href="https://openreview.net/forum?id=B02EqvyiF3">link</a>][<a href="https://github.com/thibaut-germain/SGOT">github</a>][<a href="https://thibaut-germain.github.io/files/papers/sgot_iclr.pdf">pdf</a>]
+  </li>
+
+  <li>
+    Germain, T., Kosma, C., & Oudre, L. (2025). Time series representations with hard-coded invariances. In the 42nd International Conference on Machine Learning (ICML). [<a href="https://openreview.net/forum?id=SaKPKyjDp6">link</a>][<a href="https://github.com/sissykosm/TS-InvConv">github</a>][<a href="https://thibaut-germain.github.io/files/papers/invconv_icml.pdf">pdf</a>]
   </li>
 
   <li>
@@ -55,13 +59,6 @@ author_profile: true
 
 </ol>
 
-## Submited and preprint
-
-<ol>
-  <li>
-  T. Germain, R. Flamary, V. R. Kostic, K. Lounici, A Spectral-Grassmann Wasserstein metric for operator representations of dynamical systems (Submited), 2025. [<a href="https://web3.arxiv.org/abs/2509.24920">arXiv</a>][<a href="https://thibaut-germain.github.io/files/papers/sgot.pdf">pdf</a>]
-  </li>
-</ol>
 
 ## PhD Thesis
 <ol>

@@ -18,13 +18,25 @@ Before, I was PhD student at [Centre Borelli](https://centreborelli.ens-paris-sa
 
 # News
 <ul>
+  <li> <b>February 2026:</b> Paper accepted on ICLR on novel Wasserstein metrics between operator representation of dynamical systems.
+  <details>
+  <summary> reference </summary>
+  <ul>
+    <li>
+       T. Germain, R. Flamary, V. R. Kostic, K. Lounici, A Spectral-Grassmann Wasserstein metric for operator representations of dynamical systems (ICLR), 2026. [<a href="https://openreview.net/forum?id=B02EqvyiF3">link</a>][<a href="https://github.com/thibaut-germain/SGOT">github</a>][<a href="https://thibaut-germain.github.io/files/papers/sgot_iclr.pdf">pdf</a>]
+    </li>
+  </ul>
+  </details>
+  </li>
+
+
 
   <li> <b>May 2025:</b> Paper accepted to ICML on the hard-coding of time series invariances in convolutional neural layers to improve robustness and generalization.
   <details>
   <summary> reference </summary>
   <ul>
     <li>
-      Germain, T., Kosma, C., & Oudre, L. (2025). Time series representations with hard-coded invariances. In the 42nd International Conference on Machine Learning (ICML). [<a href="https://thibaut-germain.github.io/files/papers/invconv.pdf">pdf</a>]
+       Germain, T., Kosma, C., & Oudre, L. (2025). Time series representations with hard-coded invariances. In the 42nd International Conference on Machine Learning (ICML). [<a href="https://openreview.net/forum?id=SaKPKyjDp6">link</a>][<a href="https://github.com/sissykosm/TS-InvConv">github</a>][<a href="https://thibaut-germain.github.io/files/papers/invconv_icml.pdf">pdf</a>]
     </li>
   </ul>
   </details>

@@ -1,0 +1,49 @@
+schema: hugoblox/author/v1
+slug: me
+is_owner: true
+name:
+  display: Thibaut Germain
+  given: Thibaut
+  family: Germain
+  alternate: ''  # Example: 王伟
+  pronunciation: ''  # Example: Wáng Wěi
+  pronouns: he/him
+postnominals:
+  - PhD
+# - MIEEE
+#status:
+#  icon: "☕️"
+role: Postdoctoral Researcher
+bio: |
+  My research combines machine learning and signal processing with geometric methods to study time series and dynamical systems.
+
+  Since March 2025, I have been a postdoctoral researcher at [CMAP - Ecole Polytechnique](https://cmap.ip-paris.fr), working with [Karim Lounici](http://www.cmapx.polytechnique.fr/~karim.lounici/) and [Rémi Flamary](https://remi.flamary.com). My work combines operator learning and optimal transport to compare dynamical systems, uncover shared dynamical structure, and transfer knowledge across systems.
+
+  Previously, I completed my PhD at [Centre Borelli](https://centreborelli.ens-paris-saclay.fr/en), under the supervision of [Charles Truong](https://charles.doffy.net) and [Laurent Oudre](http://www.laurentoudre.fr). I developed methods tailored for the discovery and statistical analysis of time series patterns with a particular focus on biomedical applications.
+
+affiliations:
+  - name: CMAP - Ecole Polytechnique
+    url: https://cmap.ip-paris.fr/en
+
+links:
+  - icon: at-symbol
+    url: mailto:thibaut.germain.pro@gmail.com
+    label: E-mail Me
+  #- icon: brands/x
+  #  url: https://x.com/example
+  - icon: brands/github
+    url: https://github.com/thibaut-germain
+  #- icon: brands/linkedin
+  #  url: https://www.linkedin.com/in/example/
+  - icon: academicons/google-scholar
+    url: https://scholar.google.com/citations?user=VLKQed4AAAAJ&hl=fr&inst=5021451399494135069&oi=ao
+  - icon: academicons/orcid
+    url: https://orcid.org/0009-0002-4687-0581
+
+news:
+  - date: Jun 2026
+    text: "New preprint on [Dictionary Learning for Dynamical Systems](https://arxiv.org/abs/2605.18276)."
+  - date: Jun 2026
+    text: "Invited speaker at [New Trends in Statistical Learning 2026](https://sites.google.com/view/workshop-statsml/new-trends-in-sl-vi))."
+  - date: Feb 2026
+    text: "Paper accepted at [ICLR 2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/c256585cb41de955198b9268cdc480d4-Abstract-Conference.html)."

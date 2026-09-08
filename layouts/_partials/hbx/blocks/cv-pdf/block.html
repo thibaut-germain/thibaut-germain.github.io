@@ -1,0 +1,21 @@
+{{/* Embedded PDF viewer backed by a page-bundle resource. */}}
+{{ $page := .wcPage }}
+{{ $content := .wcBlock.content }}
+{{ $filename := $content.file | default "cnrs_cv_eng.pdf" }}
+{{ $pdf := $page.Resources.GetMatch $filename }}
+
+{{ with $pdf }}
+  <meta http-equiv="refresh" content="0; url={{ .RelPermalink }}">
+  <script>window.location.replace({{ .RelPermalink | jsonify | safeJS }});</script>
+  <div class="container mx-auto max-w-prose px-6 py-12 text-center">
+    <p>
+      Opening the CV in your browser’s PDF viewer.
+      <a href="{{ .RelPermalink }}" download class="underline">Download the PDF</a>
+      if it does not open automatically.
+    </p>
+  </div>
+{{ else }}
+  <p class="py-12 text-center text-red-600 dark:text-red-400">
+    CV file “{{ $filename }}” was not found.
+  </p>
+{{ end }}

@@ -1,0 +1,30 @@
+students:
+  - names:
+      - name: "Sienna O'Shea"
+    program: "BSc Math & CS, Polytechnique"
+    period: "Feb–Jun 2026"
+    co_supervisors:
+      - name: "Rémi Flamary"
+        website: "https://remi.flamary.com"
+    topic: "Implementation of spectral-OT metrics in the optimal transport library POT"
+  - names:
+      - name: "Romain Delaunay"
+      - name: "Hugo Gaible"
+    program: "L3 ENS Paris-Saclay"
+    period: "Apr–Jun 2023"
+    co_supervisors:
+      - name: "Alexandre Bois"
+      - name: "Laurent Oudre"
+        website: "https://laurentoudre.fr/"
+    topic: "Convolutional dictionary learning for time series"
+
+  - names:
+      - name: "William Ramos"
+      - name: "Oussama Zekri"
+        website: "https://oussamazekri.fr/"
+    program: "L3 ENS Paris-Saclay"
+    period: "Apr–Jun 2022"
+    co_supervisors:
+      - name: "Laurent Oudre"
+        website: "https://laurentoudre.fr/"
+    topic: "Optimal transport and elastic measures for time series"

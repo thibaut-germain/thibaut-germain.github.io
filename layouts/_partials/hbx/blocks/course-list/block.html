@@ -1,0 +1,53 @@
+{{/* University-grouped course list backed by content/courses/courses.yaml. */}}
+{{ $page := .wcPage }}
+{{ $content := .wcBlock.content }}
+{{ $course_data := $page.Resources.GetMatch "courses.yaml" }}
+{{ $universities := slice }}
+
+{{ with $course_data }}
+  {{ $parsed := . | transform.Unmarshal }}
+  {{ with $parsed.universities }}{{ $universities = . }}{{ end }}
+{{ end }}
+
+{{ with $content.title }}
+  <div class="flex flex-col items-center max-w-prose mx-auto justify-center px-6 md:px-0">
+    <h1 class="mb-0 text-3xl font-bold text-gray-900 dark:text-white">
+      {{ . | emojify | $page.RenderString }}
+    </h1>
+  </div>
+{{ end }}
+
+<div class="course-list container mx-auto max-w-screen-lg px-4 sm:px-6 xl:px-5 pt-6 pb-5 lg:pb-8">
+  {{ range $universities }}
+    <section class="course-university mb-10">
+      <h2 class="w-full mt-6 mb-2 text-2xl font-bold leading-tight text-zinc-900 dark:text-zinc-100">
+        {{ .name }}
+      </h2>
+
+      <div class="course-university-list">
+        {{ range .courses }}
+          <article class="course-list-item py-4">
+            <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+              <h3 class="font-semibold text-zinc-900 dark:text-zinc-100">{{ .title }}</h3>
+              <span class="shrink-0 text-sm font-mono text-zinc-500 dark:text-zinc-400">{{ .period }}</span>
+            </div>
+
+            <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              {{ .level }}{{ with .role }} · {{ . }}{{ end }}
+            </div>
+
+            {{ with .page }}
+              <div class="mt-3">
+                <a href="{{ printf "/courses/%s/" . | relURL }}"
+                   class="course-content-link hb-attachment-link hb-attachment-link-small">
+                  {{ partial "functions/get_icon" (dict "name" "book-open" "attributes" "style=\"height: 1em; width: 1em;\" class=\"inline-block\"") }}
+                  Course content
+                </a>
+              </div>
+            {{ end }}
+          </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+</div>

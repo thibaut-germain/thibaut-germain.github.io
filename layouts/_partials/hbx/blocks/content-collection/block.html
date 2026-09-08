@@ -1,0 +1,989 @@
+{{/* Hugo Blox: Collection */}}
+{{/* Documentation: https://hugoblox.com/blocks/ */}}
+{{/* License: https://github.com/HugoBlox/kit/blob/main/LICENSE.md */}}
+
+{{/* Initialise */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ $content := $block.content }}
+{{ if not (reflect.IsMap $content) }}
+  {{ $content = dict }}
+{{ end }}
+
+{{ $design := $block.design }}
+{{ if not (reflect.IsMap $design) }}
+  {{ $design = dict }}
+{{ end }}
+
+
+{{/* View */}}
+{{ $view := "card" }}
+{{ $view_raw := index $design "view" }}
+
+{{ if eq (printf "%T" $view_raw) "string" }}
+  {{ $view = lower (strings.TrimSpace $view_raw) }}
+{{ end }}
+
+
+{{/* Custom: group by year */}}
+{{ $group_by_year := partial "functions/coerce_bool"
+    (dict
+      "value" (index $design "group_by_year")
+      "default" false
+    )
+}}
+
+{{/* Optional client-side publication type filter. */}}
+{{ $filter_by_publication_type := partial "functions/coerce_bool"
+    (dict
+      "value" (index $design "filter_by_publication_type")
+      "default" false
+    )
+}}
+
+
+{{/* Custom: citation symbol */}}
+{{ $citation_symbol := "▸" }}
+
+{{ if eq $view "citation" }}
+
+  {{ $citation_symbol_raw := index $design "citation_symbol" }}
+
+  {{ if eq (printf "%T" $citation_symbol_raw) "string" }}
+
+    {{ $citation_symbol_raw = strings.TrimSpace $citation_symbol_raw }}
+
+    {{ if ne $citation_symbol_raw "" }}
+      {{ $citation_symbol = $citation_symbol_raw }}
+    {{ end }}
+
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Count / offset */}}
+{{ $items_offset := partial "functions/coerce_int"
+    (dict
+      "value" (index $content "offset")
+      "default" 0
+      "min" 0
+    )
+}}
+
+{{ $items_count := partial "functions/coerce_int"
+    (dict
+      "value" (index $content "count")
+      "default" 5
+      "min" 0
+    )
+}}
+
+{{ if eq $items_count 0 }}
+  {{ $items_count = 65535 }}
+{{ end }}
+
+
+{{/* Query */}}
+{{ $query := site.Pages }}
+{{ $archive_page := "" }}
+
+
+{{/* Filters */}}
+{{ $filters := index $content "filters" }}
+
+{{ if not (reflect.IsMap $filters) }}
+  {{ $filters = dict }}
+{{ end }}
+
+
+{{/* Kinds */}}
+{{ $kinds := slice }}
+{{ $kinds_raw := index $filters "kinds" }}
+
+{{ if reflect.IsSlice $kinds_raw }}
+
+  {{ range $kinds_raw }}
+    {{ $kind := strings.TrimSpace (printf "%v" .) }}
+
+    {{ if $kind }}
+      {{ $kinds = $kinds | append $kind }}
+    {{ end }}
+  {{ end }}
+
+{{ else if eq (printf "%T" $kinds_raw) "string" }}
+
+  {{ $kind := strings.TrimSpace $kinds_raw }}
+
+  {{ if $kind }}
+    {{ $kinds = slice $kind }}
+  {{ end }}
+
+{{ end }}
+
+{{ if eq (len $kinds) 0 }}
+  {{ $kinds = slice "page" }}
+{{ end }}
+
+{{ $query = where $query "Kind" "in" $kinds }}
+
+
+{{/* Page type */}}
+{{ $page_type := "" }}
+{{ $page_type_raw := index $content "page_type" }}
+
+{{ if eq (printf "%T" $page_type_raw) "string" }}
+  {{ $page_type = strings.TrimSpace $page_type_raw }}
+{{ end }}
+
+{{ if $page_type }}
+  {{ $query = where $query "Type" $page_type }}
+  {{ $archive_page = site.GetPage "Section" $page_type }}
+{{ end }}
+
+
+{{/* Folders */}}
+{{ $folders_raw := index $filters "folders" }}
+{{ $folders := slice }}
+
+{{ if reflect.IsSlice $folders_raw }}
+
+  {{ range $folders_raw }}
+    {{ $folder := strings.TrimSpace (printf "%v" .) }}
+
+    {{ if $folder }}
+      {{ $folders = $folders | append $folder }}
+    {{ end }}
+  {{ end }}
+
+{{ else if eq (printf "%T" $folders_raw) "string" }}
+
+  {{ $folder := strings.TrimSpace $folders_raw }}
+
+  {{ if $folder }}
+    {{ $folders = slice $folder }}
+  {{ end }}
+
+{{ end }}
+
+{{ if gt (len $folders) 0 }}
+
+  {{ $query = where $query "Section" "in" $folders }}
+
+  {{ $main_folder := strings.TrimSpace (printf "%v" (index $folders 0)) }}
+
+  {{ if $main_folder }}
+    {{ $archive_page = site.GetPage "Section" $main_folder }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Tags */}}
+{{ $tags_raw := index $filters "tags" }}
+{{ $tags := slice }}
+
+{{ if reflect.IsSlice $tags_raw }}
+
+  {{ range $tags_raw }}
+    {{ $tag := strings.TrimSpace (printf "%v" .) }}
+
+    {{ if $tag }}
+      {{ $tags = $tags | append $tag }}
+    {{ end }}
+  {{ end }}
+
+{{ else if eq (printf "%T" $tags_raw) "string" }}
+
+  {{ $tag := strings.TrimSpace $tags_raw }}
+
+  {{ if $tag }}
+    {{ $tags = slice $tag }}
+  {{ end }}
+
+{{ end }}
+
+{{ if gt (len $tags) 0 }}
+
+  {{ $selected := slice }}
+
+  {{ range $tags }}
+
+    {{ $tag_page := site.GetPage (printf "tags/%s" (urlize .)) }}
+
+    {{ if $tag_page }}
+      {{ $selected = $selected | union $tag_page.Pages }}
+    {{ end }}
+
+  {{ end }}
+
+  {{ if gt (len $selected) 0 }}
+
+    {{ $query = $query | intersect $selected }}
+
+    {{ $first_tag := index $tags 0 }}
+    {{ $archive_page = site.GetPage (printf "tags/%s" (urlize $first_tag)) }}
+
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Single tag */}}
+{{ $tag := "" }}
+{{ $tag_raw := index $filters "tag" }}
+
+{{ if eq (printf "%T" $tag_raw) "string" }}
+  {{ $tag = strings.TrimSpace $tag_raw }}
+{{ end }}
+
+{{ if $tag }}
+
+  {{ with site.GetPage (printf "tags/%s" (urlize $tag)) }}
+    {{ $archive_page = . }}
+    {{ $query = $query | intersect .Pages }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Category */}}
+{{ $category := "" }}
+{{ $category_raw := index $filters "category" }}
+
+{{ if eq (printf "%T" $category_raw) "string" }}
+  {{ $category = strings.TrimSpace $category_raw }}
+{{ end }}
+
+{{ if $category }}
+
+  {{ with site.GetPage (printf "categories/%s" (urlize $category)) }}
+    {{ $archive_page = . }}
+    {{ $query = $query | intersect .Pages }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Publication type */}}
+{{ $publication_type := "" }}
+{{ $publication_type_raw := index $filters "publication_type" }}
+
+{{ if eq (printf "%T" $publication_type_raw) "string" }}
+  {{ $publication_type = strings.TrimSpace $publication_type_raw }}
+{{ end }}
+
+{{ if $publication_type }}
+
+  {{ with site.GetPage (printf "publication_types/%s" $publication_type) }}
+    {{ $archive_page = . }}
+    {{ $query = $query | intersect .Pages }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Exclude publication type */}}
+{{ $exclude_publication_type := "" }}
+{{ $exclude_publication_type_raw := index $filters "exclude_publication_type" }}
+
+{{ if eq (printf "%T" $exclude_publication_type_raw) "string" }}
+  {{ $exclude_publication_type = strings.TrimSpace $exclude_publication_type_raw }}
+{{ end }}
+
+{{ if $exclude_publication_type }}
+
+  {{ with site.GetPage (printf "publication_types/%s" $exclude_publication_type) }}
+    {{ $query = $query | complement .Pages }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Author */}}
+{{ $author_filter := "" }}
+{{ $author_filter_raw := index $filters "author" }}
+
+{{ if eq (printf "%T" $author_filter_raw) "string" }}
+  {{ $author_filter = strings.TrimSpace $author_filter_raw }}
+{{ end }}
+
+{{ if $author_filter }}
+
+  {{ with site.GetPage (printf "authors/%s" (urlize $author_filter)) }}
+    {{ $archive_page = . }}
+    {{ $query = $query | intersect .Pages }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Featured */}}
+{{ $featured_only := partial "functions/coerce_bool"
+    (dict
+      "value" (index $filters "featured_only")
+      "default" false
+    )
+}}
+
+{{ if $featured_only }}
+  {{ $query = where $query "Params.featured" "==" true }}
+{{ end }}
+
+
+{{ $exclude_featured := partial "functions/coerce_bool"
+    (dict
+      "value" (index $filters "exclude_featured")
+      "default" false
+    )
+}}
+
+{{ if $exclude_featured }}
+  {{ $query = where $query "Params.featured" "!=" true }}
+{{ end }}
+
+
+{{/* Exclude past */}}
+{{ $exclude_past := partial "functions/coerce_bool"
+    (dict
+      "value" (index $filters "exclude_past")
+      "default" false
+    )
+}}
+
+{{ if $exclude_past }}
+
+  {{ $filtered := slice }}
+
+  {{ range $query }}
+
+    {{ $start := .Date }}
+
+    {{ with .Params.event_start }}
+      {{ $start = . }}
+    {{ end }}
+
+    {{ $end := $start }}
+
+    {{ with .Params.event_end }}
+      {{ $end = . }}
+    {{ end }}
+
+    {{ if ge $end now }}
+      {{ $filtered = $filtered | append . }}
+    {{ end }}
+
+  {{ end }}
+
+  {{ $query = $filtered }}
+
+{{ end }}
+
+
+{{/* Exclude future */}}
+{{ $exclude_future := partial "functions/coerce_bool"
+    (dict
+      "value" (index $filters "exclude_future")
+      "default" false
+    )
+}}
+
+{{ if $exclude_future }}
+
+  {{ $filtered := slice }}
+
+  {{ range $query }}
+
+    {{ $start := .Date }}
+
+    {{ with .Params.event_start }}
+      {{ $start = . }}
+    {{ end }}
+
+    {{ if lt $start now }}
+      {{ $filtered = $filtered | append . }}
+    {{ end }}
+
+  {{ end }}
+
+  {{ $query = $filtered }}
+
+{{ end }}
+
+
+{{ $count := len $query }}
+
+
+{{/* Sort */}}
+{{ $sort_by := "Date" }}
+{{ $sort_by_raw := index $content "sort_by" }}
+
+{{ if eq (printf "%T" $sort_by_raw) "string" }}
+
+  {{ $sort_by_raw = strings.TrimSpace $sort_by_raw }}
+
+  {{ if ne $sort_by_raw "" }}
+    {{ $sort_by = $sort_by_raw }}
+  {{ end }}
+
+{{ end }}
+
+{{ $sort_by = partial "functions/get_sort_by_parameter" $sort_by }}
+
+
+{{ $sort_ascending := false }}
+
+{{ if isset $content "sort_ascending" }}
+
+  {{ $sort_ascending = partial "functions/coerce_bool"
+      (dict
+        "value" (index $content "sort_ascending")
+        "default" false
+      )
+  }}
+
+{{ else }}
+
+  {{ $order_raw := index $content "order" }}
+
+  {{ if eq (printf "%T" $order_raw) "string" }}
+
+    {{ if eq (lower (strings.TrimSpace $order_raw)) "asc" }}
+      {{ $sort_ascending = true }}
+    {{ end }}
+
+  {{ end }}
+
+{{ end }}
+
+{{ $sort_order := cond $sort_ascending "asc" "desc" }}
+{{ $query = sort $query $sort_by $sort_order }}
+
+
+{{/* Offset and limit */}}
+{{ if gt $items_offset 0 }}
+
+  {{ $query = first $items_count (after $items_offset $query) }}
+
+{{ else }}
+
+  {{ $query = first $items_count $query }}
+
+{{ end }}
+
+
+{{/* Optional: hide the entire collection when empty */}}
+{{ $hide_if_empty := partial "functions/coerce_bool"
+    (dict
+      "value" (index $content "hide_if_empty")
+      "default" false
+    )
+}}
+
+{{ $show_collection := or (not $hide_if_empty) (gt (len $query) 0) }}
+
+
+{{/* Alpine */}}
+{{ range $query }}
+
+  {{ if isset .Params "author_notes" }}
+    {{ $page.Store.Set "has_alpine" true }}
+    {{ break }}
+  {{ end }}
+
+{{ end }}
+
+
+{{/* Columns */}}
+{{ $columns := partial "functions/coerce_int"
+    (dict
+      "value" (index $design "columns")
+      "default" 2
+      "min" 1
+      "max" 4
+    )
+}}
+
+
+{{ if $show_collection }}
+
+{{/* Heading */}}
+{{ $title := "" }}
+
+{{ with index $content "title" }}
+  {{ $title = printf "%v" . | emojify | $page.RenderString }}
+{{ end }}
+
+{{ $text := "" }}
+
+{{ with index $content "text" }}
+  {{ $text = printf "%v" . | emojify | $page.RenderString }}
+{{ end }}
+
+
+{{/*
+  Compact heading.
+*/}}
+{{ if $title }}
+
+<div class="flex flex-col items-center max-w-prose mx-auto justify-center px-6 md:px-0">
+
+  <div class="mb-0 text-3xl font-bold text-gray-900 dark:text-white">
+    {{ $title }}
+  </div>
+
+  {{ with $text }}
+    <p class="mt-1">{{ . }}</p>
+  {{ end }}
+
+</div>
+
+{{ end }}
+
+
+{{/* Collection */}}
+<div class="flex flex-col items-center px-6"{{ if $filter_by_publication_type }} data-publication-filter-root{{ end }}>
+
+  {{ $config := dict
+      "columns" $columns
+      "len" (len $query)
+      "fill_image" (partial "functions/coerce_bool"
+        (dict
+          "value" (index $design "fill_image")
+          "default" true
+        )
+      )
+      "show_date" (partial "functions/coerce_bool"
+        (dict
+          "value" (index $design "show_date")
+          "default" true
+        )
+      )
+      "show_read_time" (partial "functions/coerce_bool"
+        (dict
+          "value" (index $design "show_read_time")
+          "default" true
+        )
+      )
+      "show_read_more" (partial "functions/coerce_bool"
+        (dict
+          "value" (index $design "show_read_more")
+          "default" true
+        )
+      )
+  }}
+
+  {{ $featured_gallery := and $featured_only (eq $view "article-grid") }}
+
+  {{ if $filter_by_publication_type }}
+    <div class="flex flex-wrap items-center justify-center gap-2 mt-6 mb-2" role="group" aria-label="Group publications">
+      <span class="mr-1 text-sm text-zinc-600 dark:text-zinc-400">Sort by:</span>
+      {{ range $index, $filter := slice
+          (dict "value" "year" "label" "Year")
+          (dict "value" "type" "label" "Publication type")
+      }}
+        <input
+          class="publication-filter-input sr-only"
+          type="radio"
+          name="publication-grouping"
+          id="publication-sort-{{ $filter.value }}"
+          value="{{ $filter.value }}"
+          {{ if eq $index 0 }}checked{{ end }}
+        >
+        <label
+          for="publication-sort-{{ $filter.value }}"
+          class="publication-filter-button cursor-pointer px-4 py-1.5 rounded-full border text-sm font-medium transition-colors"
+        >
+          {{ $filter.label }}
+        </label>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{/*
+    Keep the native HugoBlox start fragment.
+    This preserves the proper width, left alignment, and margins.
+  */}}
+  {{ if $featured_gallery }}
+    <div class="featured-gallery container mx-auto max-w-screen-lg px-8 xl:px-5 py-5 lg:py-8" data-featured-gallery>
+      <div class="featured-gallery-viewport" data-gallery-viewport tabindex="0" aria-label="Featured publications gallery">
+        <div class="featured-gallery-track">
+  {{ else }}
+  {{ partial "functions/render_view"
+      (dict
+        "fragment" "start"
+        "page" $block
+        "item" .
+        "view" $view
+        "config" $config
+      )
+  }}
+  {{ end }}
+
+
+  {{ if $group_by_year }}
+
+    {{ $groups := $query.GroupByDate "2006" }}
+
+    <div class="publication-groups-by-year w-full">
+    {{ range $groupIndex, $group := $groups }}
+
+      <div class="w-full" data-publication-year>
+      {{/*
+        Spacing:
+        - first year: small gap after collection title
+        - later years: larger separation
+        - small gap below year before citations
+      */}}
+      <h2
+        class="w-full text-2xl font-bold
+               text-gray-900 dark:text-white
+               leading-tight
+               {{ if eq $groupIndex 0 }}mt-6{{ else }}mt-6{{ end }}
+               mb-2"
+      >
+        {{ $group.Key }}
+      </h2>
+
+
+      {{ range $index, $item := $group.Pages }}
+
+        {{ if eq $view "citation" }}
+
+          {{/* Citation-only symbol and indentation */}}
+          <div class="publication-entry-row w-full flex items-start gap-3"
+               data-publication-filter-item
+               data-publication-types="{{ delimit $item.Params.publication_types " " | lower }}">
+
+            <div class="min-w-0 flex-1">
+
+              {{ partial "functions/render_view"
+                  (dict
+                    "page" $block
+                    "item" $item
+                    "view" $view
+                    "index" $index
+                    "config" $config
+                  )
+              }}
+
+            </div>
+
+          </div>
+
+        {{ else }}
+
+          {{/*
+            Non-citation views are rendered normally.
+          */}}
+          {{ partial "functions/render_view"
+              (dict
+                "page" $block
+                "item" $item
+                "view" $view
+                "index" $index
+                "config" $config
+              )
+          }}
+
+        {{ end }}
+
+      {{ end }}
+
+      </div>
+    {{ end }}
+    </div>
+
+    <div class="publication-groups-by-type w-full">
+      {{ $known_types := slice "preprint" "conference" "journal" "thesis" }}
+      {{ range $type := $known_types }}
+        {{ $typed_pages := where $query "Params.publication_types" "intersect" (slice $type) }}
+        {{ if gt (len $typed_pages) 0 }}
+          <section class="w-full">
+            <h2 class="w-full text-2xl font-bold text-gray-900 dark:text-white leading-tight mt-6 mb-2">
+              {{ $type | humanize | title }}
+            </h2>
+            {{ range $index, $item := $typed_pages }}
+              <div class="publication-entry-row w-full flex items-start gap-3">
+                <div class="min-w-0 flex-1">
+                  {{ partial "functions/render_view"
+                      (dict "page" $block "item" $item "view" $view "index" $index "config" $config)
+                  }}
+                </div>
+              </div>
+            {{ end }}
+          </section>
+        {{ end }}
+      {{ end }}
+
+      {{ $other_pages := slice }}
+      {{ range $item := $query }}
+        {{ $types := $item.Params.publication_types | default (slice) }}
+        {{ if eq (len (intersect $types $known_types)) 0 }}
+          {{ $other_pages = $other_pages | append $item }}
+        {{ end }}
+      {{ end }}
+      {{ if gt (len $other_pages) 0 }}
+        <section class="w-full">
+          <h2 class="w-full text-2xl font-bold text-gray-900 dark:text-white leading-tight mt-6 mb-2">Other</h2>
+          {{ range $index, $item := $other_pages }}
+            <div class="publication-entry-row w-full flex items-start gap-3">
+              <div class="min-w-0 flex-1">
+                {{ partial "functions/render_view"
+                    (dict "page" $block "item" $item "view" $view "index" $index "config" $config)
+                }}
+              </div>
+            </div>
+          {{ end }}
+        </section>
+      {{ end }}
+    </div>
+
+
+  {{ else }}
+
+
+    {{ range $index, $item := $query }}
+
+      {{ if eq $view "citation" }}
+
+        <div class="publication-entry-row w-full flex items-start gap-3"
+             data-publication-filter-item
+             data-publication-types="{{ delimit $item.Params.publication_types " " | lower }}">
+
+          <div class="min-w-0 flex-1">
+
+            {{ partial "functions/render_view"
+                (dict
+                  "page" $block
+                  "item" $item
+                  "view" $view
+                  "index" $index
+                  "config" $config
+                )
+            }}
+
+          </div>
+
+        </div>
+
+      {{ else if $featured_gallery }}
+
+        <div class="featured-gallery-slide" data-gallery-slide>
+          {{ partial "functions/render_view"
+              (dict
+                "page" $block
+                "item" $item
+                "view" $view
+                "index" $index
+                "config" $config
+              )
+          }}
+        </div>
+
+      {{ else }}
+
+        {{ partial "functions/render_view"
+            (dict
+              "page" $block
+              "item" $item
+              "view" $view
+              "index" $index
+              "config" $config
+            )
+        }}
+
+      {{ end }}
+
+    {{ end }}
+
+
+  {{ end }}
+
+
+  {{/*
+    Keep the native HugoBlox end fragment.
+  */}}
+  {{ if $featured_gallery }}
+        </div>
+      </div>
+
+      <div class="featured-gallery-navigation" aria-label="Featured publication navigation">
+        {{ if gt (len $query) 1 }}
+          <button class="featured-gallery-arrow" type="button" data-gallery-previous aria-label="Previous featured publication">&#8592;</button>
+        {{ end }}
+        <div class="featured-gallery-dots">
+          {{ range $index, $_ := $query }}
+            <button
+              class="featured-gallery-dot{{ if eq $index 0 }} is-active{{ end }}"
+              type="button"
+              data-gallery-dot="{{ $index }}"
+              aria-label="Show featured publication {{ add $index 1 }} of {{ len $query }}"
+              aria-current="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
+            ></button>
+          {{ end }}
+        </div>
+        {{ if gt (len $query) 1 }}
+          <button class="featured-gallery-arrow" type="button" data-gallery-next aria-label="Next featured publication">&#8594;</button>
+        {{ end }}
+      </div>
+    </div>
+
+    <script>
+      (() => {
+        const gallery = document.currentScript.previousElementSibling;
+        const viewport = gallery.querySelector('[data-gallery-viewport]');
+        const slides = [...gallery.querySelectorAll('[data-gallery-slide]')];
+        const dots = [...gallery.querySelectorAll('[data-gallery-dot]')];
+        let active = 0;
+
+        const show = (index) => {
+          active = (index + slides.length) % slides.length;
+          viewport.scrollTo({ left: slides[active].offsetLeft, behavior: 'smooth' });
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === active);
+            dot.setAttribute('aria-current', i === active ? 'true' : 'false');
+          });
+        };
+
+        gallery.querySelector('[data-gallery-previous]')?.addEventListener('click', () => show(active - 1));
+        gallery.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(active + 1));
+        dots.forEach((dot, index) => dot.addEventListener('click', () => show(index)));
+
+        let scrollTimer;
+        viewport.addEventListener('scroll', () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => {
+            const index = Math.round(viewport.scrollLeft / viewport.clientWidth);
+            active = Math.max(0, Math.min(index, slides.length - 1));
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('is-active', i === active);
+              dot.setAttribute('aria-current', i === active ? 'true' : 'false');
+            });
+          }, 80);
+        }, { passive: true });
+
+        viewport.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowLeft') show(active - 1);
+          if (event.key === 'ArrowRight') show(active + 1);
+        });
+      })();
+    </script>
+  {{ else }}
+  {{ partial "functions/render_view"
+      (dict
+        "fragment" "end"
+        "page" $block
+        "item" .
+        "view" $view
+      )
+  }}
+  {{ end }}
+
+</div>
+
+
+{{/* Archive */}}
+{{ $archive := index $content "archive" }}
+
+{{ if not (reflect.IsMap $archive) }}
+  {{ $archive = dict }}
+{{ end }}
+
+{{ $show_archive_link := gt $count $items_count }}
+
+{{ if isset $archive "enable" }}
+
+  {{ $show_archive_link = partial "functions/coerce_bool"
+      (dict
+        "value" (index $archive "enable")
+        "default" false
+      )
+  }}
+
+{{ end }}
+
+
+{{ if $show_archive_link | and $archive_page }}
+
+  {{ $archive_link := "" }}
+  {{ $archive_link_raw := index $archive "link" }}
+
+  {{ if eq (printf "%T" $archive_link_raw) "string" }}
+    {{ $archive_link = strings.TrimSpace $archive_link_raw }}
+  {{ end }}
+
+  {{ if not $archive_link }}
+    {{ $archive_link = $archive_page.RelPermalink }}
+  {{ end }}
+
+  {{ if $archive_link }}
+
+    {{ $scheme := (urls.Parse $archive_link).Scheme }}
+
+    {{ if not $scheme }}
+
+      {{ if not (hasPrefix $archive_link "#") }}
+        {{ $archive_link = $archive_link | relLangURL }}
+      {{ end }}
+
+    {{ end }}
+
+  {{ end }}
+
+
+  {{ $items_type := $archive_page.Type }}
+  {{ $i18n := "" }}
+
+  {{ if eq $items_type "blog" }}
+
+    {{ $i18n = "more_posts" }}
+
+  {{ else if eq $items_type "events" }}
+
+    {{ $i18n = "more_talks" }}
+
+  {{ else if eq $items_type "publications" }}
+
+    {{ $i18n = "more_publications" }}
+
+  {{ else }}
+
+    {{ $i18n = "more_pages" }}
+
+  {{ end }}
+
+
+  {{ $archive_text := "" }}
+  {{ $archive_text_raw := index $archive "text" }}
+
+  {{ if eq (printf "%T" $archive_text_raw) "string" }}
+    {{ $archive_text = strings.TrimSpace $archive_text_raw }}
+  {{ end }}
+
+  {{ if not $archive_text }}
+    {{ $archive_text = i18n $i18n | default "See all" }}
+  {{ end }}
+
+
+  <div class="container mx-auto max-w-screen-lg px-8 xl:px-5 pb-5 lg:pb-8">
+
+    <div class="collection-archive-action mt-10 flex justify-center">
+
+      <a
+        class="hb-attachment-link hb-attachment-link-small"
+        href="{{ $archive_link | safeURL }}"
+      >
+        <span>
+          {{ $archive_text | emojify }}
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+{{ end }}
+
+{{ end }}

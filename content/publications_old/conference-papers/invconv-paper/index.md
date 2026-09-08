@@ -1,0 +1,99 @@
+---
+title: 'Time series representations with hard-coded invariances'
+
+# Authors
+# If you created a profile for a user (e.g. the default `me` user), write the username (folder name) here
+# and it will be replaced with their full name and linked to their profile.
+authors:
+  - me
+  - Chrysoula Kosma
+  - Laurent Oudre
+
+# Author notes (optional)
+author_notes:
+
+
+date: '2025-04-25T00:00:00Z'
+
+# Schedule page publish date (NOT publication's date).
+publishDate: '2025-01-01T00:00:00Z'
+
+# Publication type.
+# Accepts a single type but formatted as a YAML list (for Hugo requirements).
+# Enter a publication type from the CSL standard.
+publication_types: ['conference']
+
+# Publication metadata — structured fields used by citation styles and BibTeX export.
+publication:
+  name: "Forty-second International Conference on Machine Learning"
+  short_name: "ICML"
+
+peer_reviewed: true
+open_access: true
+#license: CC-BY-4.0
+
+# Awards, honors, and recognitions. Surfaced as badges on the page and in listings.
+awards:
+
+# Funders and grants. Required by many funders for compliance reporting.
+funding:
+  - funder: "National Science Foundation"
+    grant: "NSF-2401234"
+  - funder: "European Research Council"
+    grant: "ERC-StG-101234"
+
+abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.
+
+# Summary. An optional shortened abstract.
+summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
+
+tags:
+#  - Large Language Models
+
+# Display this page in the Featured widget?
+featured: True
+
+# Standard identifiers for auto-linking
+hugoblox:
+#  ids:
+#    doi: 10.5555/123456
+
+# Custom links
+links:
+  - type: pdf
+    url: ""
+  - type: code
+    url: https://github.com/HugoBlox/kit
+  - type: link
+    url: https://hugoblox.com
+#  - type: dataset
+#    url: https://github.com/HugoBlox/kit
+#  - type: slides
+#    url: https://www.slideshare.net/
+#  - type: source
+#    url: https://github.com/HugoBlox/kit
+#  - type: video
+#    url: https://youtube.com
+
+# Featured image
+# To use, add an image named `featured.jpg/png` to your page's folder.
+image:
+  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pLCdAaMFLTE)'
+  focal_point: ''
+  preview_only: false
+
+# Associated Projects (optional).
+#   Associate this publication with one or more of your projects.
+#   Simply enter your project's folder or file name without extension.
+#   E.g. `internal-project` references `content/projects/internal-project/index.md`.
+#   Otherwise, set `projects: []`.
+projects:
+  - example
+
+# Slides (optional).
+#   Associate this publication with Markdown slides.
+#   Simply enter your slide deck's filename without extension.
+#   E.g. `slides: "example"` references `content/slides/example/index.md`.
+#   Otherwise, set `slides: ""`.
+slides: ""
+---

@@ -1,0 +1,98 @@
+{{/* Student lists backed by YAML resources in content/people/. */}}
+{{ $page := .wcPage }}
+{{ $content := .wcBlock.content }}
+
+{{ with $content.title }}
+  <div class="flex flex-col items-center max-w-prose mx-auto justify-center px-6 md:px-0">
+    <h1 class="mb-0 text-3xl font-bold text-gray-900 dark:text-white">
+      {{ . | emojify | $page.RenderString }}
+    </h1>
+  </div>
+{{ end }}
+
+<div class="people-list container mx-auto max-w-screen-lg px-4 sm:px-6 xl:px-5 pt-6 pb-5 lg:pb-8">
+  {{ $sections := slice
+    (dict "title" "PhD Students" "file" "phd.yaml")
+    (dict "title" "Master Students" "file" "graduate.yaml")
+    (dict "title" "Undergraduate Students" "file" "undergraduate.yaml")
+  }}
+
+  {{ range $sections }}
+    {{ $section := . }}
+    {{ $students := slice }}
+    {{ with $page.Resources.GetMatch $section.file }}
+      {{ $parsed := . | transform.Unmarshal }}
+      {{ with $parsed.students }}{{ $students = . }}{{ end }}
+    {{ end }}
+
+    <section class="people-group mb-10" aria-labelledby="people-{{ $section.file | strings.TrimSuffix ".yaml" }}">
+      <h2 id="people-{{ $section.file | strings.TrimSuffix ".yaml" }}"
+          class="w-full text-2xl font-bold text-gray-900 dark:text-white leading-tight mt-6 mb-2">
+        {{ $section.title }}
+      </h2>
+
+      {{ if eq (len $students) 0 }}
+        <p class="text-gray-600 dark:text-gray-400">No students listed.</p>
+      {{ end }}
+
+      {{ range $students }}
+        <article class="people-list-item w-full py-4">
+          <div class="min-w-0 text-zinc-700 dark:text-zinc-300">
+            <h3 class="inline font-semibold text-zinc-900 dark:text-zinc-100">
+              {{ if .name }}
+                {{ with .website }}<a href="{{ . | safeURL }}" target="_blank" rel="noopener" class="underline underline-offset-2">{{ end }}
+                {{ .name }}
+                {{ if .website }}</a>{{ end }}
+              {{ else }}
+                {{ range $index, $person := .names }}
+                  {{ if $index }} and {{ end }}
+                  {{ with $person.website }}<a href="{{ . | safeURL }}" target="_blank" rel="noopener" class="underline underline-offset-2">{{ end }}
+                  {{ $person.name }}
+                  {{ if $person.website }}</a>{{ end }}
+                {{ end }}
+              {{ end }}
+            </h3>
+
+            {{ with .program }}<span>, {{ . }}</span>{{ end }}
+            {{ with .period }}<span>, {{ . }}</span>{{ end }}
+
+            {{ with .co_supervisors }}
+              <div class="mt-1 text-sm">
+                Co-supervised with
+                {{ $last := sub (len .) 1 }}
+                {{ range $index, $person := . }}
+                  {{ if $index }}{{ if eq $index $last }} and {{ else }}, {{ end }}{{ end }}
+                  {{ with $person.website }}<a href="{{ . | safeURL }}" target="_blank" rel="noopener" class="text-primary-600 dark:text-primary-400 underline underline-offset-2">{{ end }}
+                  {{ $person.name }}
+                  {{ if $person.website }}</a>{{ end }}
+                {{ end }}.
+              </div>
+            {{ end }}
+
+            {{ with .topic }}
+              <div class="mt-1">“{{ . }}”.</div>
+            {{ end }}
+
+            {{ with .publications }}
+              <div class="mt-3">
+                <div class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Publications</div>
+                {{ range . }}
+                  <div class="mt-1 text-sm">
+                    {{ .authors }}. “{{ .title }}”. <em>{{ .venue }}</em>{{ with .date }}, {{ . }}{{ end }}.
+                    {{ with .url }}
+                      <a href="{{ . | safeURL }}" target="_blank" rel="noopener"
+                         class="hb-attachment-link hb-attachment-link-small ml-2">
+                        {{ partial "functions/get_icon" (dict "name" "link" "attributes" "style=\"height: 1em; width: 1em;\" class=\"inline-block\"") }}
+                        Link
+                      </a>
+                    {{ end }}
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
+    </section>
+  {{ end }}
+</div>

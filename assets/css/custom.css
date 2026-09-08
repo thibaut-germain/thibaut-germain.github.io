@@ -1,0 +1,644 @@
+/* Share the contact callout's quiet surface with the navigation. */
+:root {
+  --contact-surface: rgb(244 244 245 / 45%);
+}
+
+.dark {
+  --contact-surface: rgb(39 39 42 / 35%);
+}
+
+#site-header.header {
+  --hb-color-header-bg: color-mix(in srgb, rgb(244 244 245) 45%, var(--hb-color-background));
+  --hb-color-header-fg: var(--hb-color-foreground);
+  background-color: var(--hb-color-header-bg);
+  color: var(--hb-color-foreground);
+  border-bottom: 1px solid rgb(161 161 170 / 20%);
+  box-shadow: none;
+}
+
+.dark #site-header.header {
+  --hb-color-header-bg: color-mix(in srgb, rgb(39 39 42) 35%, var(--hb-color-background));
+}
+
+.resume-biography .bio-content-column {
+  min-width: 0;
+}
+
+.resume-biography .bio-section-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.resume-biography .bio-text > :first-child {
+  margin-top: 0;
+}
+
+.resume-biography .bio-news-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resume-biography .bio-news-row {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
+  gap: 1rem;
+}
+
+.resume-biography .bio-news-text {
+  min-width: 0;
+  width: auto;
+  max-width: 100%;
+  white-space: normal;
+  text-align: justify;
+  overflow-wrap: anywhere;
+}
+
+.resume-biography .bio-news-text > :first-child {
+  margin-top: 0;
+}
+
+.resume-biography .bio-news-text > :last-child {
+  margin-bottom: 0;
+}
+
+/* A quiet landing-page introduction on the same neutral canvas as inner pages. */
+#biography {
+  border-bottom: 1px solid rgb(161 161 170 / 20%);
+}
+
+#biography .resume-biography > div {
+  position: relative;
+  padding-top: 0;
+}
+
+#biography .resume-biography {
+  padding-top: 0.5rem;
+}
+
+#biography .avatar-wrapper {
+  border-radius: 50%;
+  outline: 1px solid rgb(161 161 170 / 30%);
+  outline-offset: 7px;
+  box-shadow: 0 12px 32px rgb(24 24 27 / 8%);
+}
+
+.dark #biography {
+  border-bottom-color: rgb(113 113 122 / 25%);
+}
+
+.dark #biography .avatar-wrapper {
+  outline-color: rgb(161 161 170 / 25%);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 18%);
+}
+
+/* Do not reserve section spacing when the optional featured publications are empty. */
+#papers:has(> .home-section-bg:only-child) {
+  display: none;
+}
+
+/* Keep consecutive publication sections visually connected. */
+#papers:not(:has(> .home-section-bg:only-child)) {
+  padding-bottom: 2rem;
+}
+
+#papers:not(:has(> .home-section-bg:only-child)) + .hbb-section {
+  padding-top: 2rem;
+}
+
+#recent-publications .publication-citation-list {
+  padding-bottom: 0;
+}
+
+#recent-publications .collection-archive-action {
+  margin-top: 0.5rem;
+}
+
+/* Add breathing room between the landing-page heading and its citation list. */
+#recent-publications > .home-section-bg + div + div {
+  margin-top: 1.5rem;
+}
+
+.featured-gallery-viewport {
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 0.75rem;
+}
+
+.featured-gallery-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.featured-gallery-track {
+  display: flex;
+  height: 21rem;
+}
+
+.featured-gallery-slide {
+  flex: 0 0 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.featured-gallery-slide > [role="article"] {
+  height: 100%;
+}
+
+.featured-gallery-slide > [role="article"] > div:last-child {
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.featured-gallery-slide > [role="article"] > div:last-child > p {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.featured-gallery-slide > [role="article"] > div:last-child > div:last-child {
+  flex-shrink: 0;
+}
+
+.featured-gallery-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.featured-gallery-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.featured-gallery-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  padding: 0;
+  border: 0;
+  border-radius: 9999px;
+  background: rgb(161 161 170);
+  cursor: pointer;
+  transition: width 180ms ease, background-color 180ms ease;
+}
+
+.featured-gallery-dot.is-active {
+  width: 1.5rem;
+  background: var(--color-primary-600, rgb(2 132 199));
+}
+
+.featured-gallery-arrow {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgb(161 161 170 / 45%);
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.featured-gallery-arrow:hover {
+  color: var(--color-primary-600, rgb(2 132 199));
+  border-color: currentColor;
+}
+
+.featured-gallery-dot:focus-visible,
+.featured-gallery-arrow:focus-visible,
+.featured-gallery-viewport:focus-visible {
+  outline: 2px solid var(--color-primary-500, rgb(14 165 233));
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .featured-gallery-track {
+    height: 13.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-gallery-viewport {
+    scroll-behavior: auto;
+  }
+}
+
+/* Publication type filters use the same restrained palette as HugoBlox controls. */
+.publication-filter-button {
+  color: rgb(82 82 91);
+  background: rgb(255 255 255 / 80%);
+  border-color: rgb(212 212 216);
+}
+
+[data-publication-filter-item][hidden],
+[data-publication-year][hidden] {
+  display: none !important;
+}
+
+.publication-filter-button:hover {
+  color: var(--color-primary-700, rgb(3 105 161));
+  border-color: var(--color-primary-400, rgb(56 189 248));
+}
+
+.publication-filter-input:checked + .publication-filter-button {
+  color: white;
+  background: var(--color-primary-600, rgb(2 132 199));
+  border-color: var(--color-primary-600, rgb(2 132 199));
+}
+
+.dark .publication-filter-button {
+  color: rgb(212 212 216);
+  background: rgb(39 39 42 / 80%);
+  border-color: rgb(82 82 91);
+}
+
+.dark .publication-filter-button:hover {
+  color: var(--color-primary-300, rgb(125 211 252));
+  border-color: var(--color-primary-500, rgb(14 165 233));
+}
+
+.dark .publication-filter-input:checked + .publication-filter-button {
+  color: white;
+  background: var(--color-primary-600, rgb(2 132 199));
+  border-color: var(--color-primary-600, rgb(2 132 199));
+}
+
+[data-publication-filter-root]:has(#publication-filter-journal:checked)
+  [data-publication-filter-item]:not([data-publication-types~="journal"]),
+[data-publication-filter-root]:has(#publication-filter-conference:checked)
+  [data-publication-filter-item]:not([data-publication-types~="conference"]),
+[data-publication-filter-root]:has(#publication-filter-preprint:checked)
+  [data-publication-filter-item]:not([data-publication-types~="preprint"]) {
+  display: none !important;
+}
+
+[data-publication-filter-root]:has(#publication-filter-journal:checked)
+  [data-publication-year]:not(:has([data-publication-types~="journal"])),
+[data-publication-filter-root]:has(#publication-filter-conference:checked)
+  [data-publication-year]:not(:has([data-publication-types~="conference"])),
+[data-publication-filter-root]:has(#publication-filter-preprint:checked)
+  [data-publication-year]:not(:has([data-publication-types~="preprint"])) {
+  display: none !important;
+}
+
+.publication-filter-input:focus-visible + .publication-filter-button {
+  outline: 2px solid var(--color-primary-500, rgb(14 165 233));
+  outline-offset: 2px;
+}
+
+.publication-groups-by-type {
+  display: none;
+}
+
+[data-publication-filter-root]:has(#publication-sort-type:checked)
+  .publication-groups-by-year {
+  display: none;
+}
+
+[data-publication-filter-root]:has(#publication-sort-type:checked)
+  .publication-groups-by-type {
+  display: block;
+}
+
+/* Quiet separators and compact attachment controls for publication lists. */
+.publication-entry-row {
+  counter-increment: publication;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgb(24 24 27 / 10%);
+}
+
+.publication-groups-by-year,
+.publication-groups-by-type {
+  counter-reset: publication;
+}
+
+.publication-entry-row::before {
+  content: counter(publication) ".";
+  flex: 0 0 2rem;
+  padding-top: 0.1rem;
+  color: rgb(113 113 122);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.dark .publication-entry-row {
+  border-bottom-color: rgb(255 255 255 / 12%);
+}
+
+.dark .publication-entry-row::before {
+  color: rgb(161 161 170);
+}
+
+.publication-contact {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid rgb(161 161 170 / 40%);
+  border-radius: 0.5rem;
+  background: var(--contact-surface);
+  color: rgb(63 63 70);
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.publication-contact-icon {
+  flex: 0 0 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.15rem;
+}
+
+.publication-contact-title {
+  display: block;
+  font-weight: 600;
+}
+
+.publication-contact-description {
+  display: block;
+  margin-top: 0.15rem;
+  font-weight: 400;
+  color: rgb(82 82 91);
+}
+
+.publication-contact:hover {
+  border-color: var(--color-primary-400, rgb(56 189 248));
+  background: rgb(244 244 245 / 85%);
+}
+
+.publication-contact:focus-visible {
+  outline: 2px solid var(--color-primary-500, rgb(14 165 233));
+  outline-offset: 3px;
+}
+
+.dark .publication-contact {
+  color: rgb(228 228 231);
+  background: var(--contact-surface);
+  border-color: rgb(113 113 122 / 50%);
+}
+
+.dark .publication-contact-description {
+  color: rgb(161 161 170);
+}
+
+.dark .publication-contact:hover {
+  border-color: var(--color-primary-500, rgb(14 165 233));
+  background: rgb(39 39 42 / 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .publication-contact {
+    transition: none;
+  }
+}
+
+.publication-abstract-heading {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+.publication-abstract-text {
+  grid-column: 1 / -1;
+  text-align: justify;
+}
+
+.publication-entry-row .pub-list-item {
+  margin-bottom: 0 !important;
+}
+
+:is(.publication-entry-row, .publication-detail-links, .collection-archive-action) .hb-attachment-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.4rem;
+  padding: 0.18rem 0.55rem;
+  color: rgb(63 63 70);
+  background: transparent;
+  border: 1px solid rgb(161 161 170 / 55%);
+  border-radius: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+
+:is(.publication-entry-row, .publication-detail-links, .collection-archive-action) .hb-attachment-link:hover {
+  color: var(--color-primary-700, rgb(3 105 161));
+  background: rgb(244 244 245 / 70%);
+  border-color: var(--color-primary-400, rgb(56 189 248));
+}
+
+.dark :is(.publication-entry-row, .publication-detail-links, .collection-archive-action) .hb-attachment-link {
+  color: rgb(212 212 216);
+  border-color: rgb(113 113 122 / 70%);
+}
+
+.dark :is(.publication-entry-row, .publication-detail-links, .collection-archive-action) .hb-attachment-link:hover {
+  color: var(--color-primary-300, rgb(125 211 252));
+  background: rgb(39 39 42 / 75%);
+  border-color: var(--color-primary-500, rgb(14 165 233));
+}
+
+:is(.publication-entry-row, .publication-detail-links, .collection-archive-action) .hb-attachment-link:focus-visible {
+  outline: 2px solid var(--color-primary-500, rgb(14 165 233));
+  outline-offset: 2px;
+}
+
+/* Talks mirror the quiet rhythm and attachment controls of publication rows. */
+.talk-list-item {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgb(24 24 27 / 10%);
+}
+
+.dark .talk-list-item {
+  border-bottom-color: rgb(255 255 255 / 12%);
+}
+
+.talk-list-item .hb-attachment-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0;
+  padding: 0.18rem 0.55rem;
+  color: rgb(63 63 70);
+  background: transparent;
+  border: 1px solid rgb(161 161 170 / 55%);
+  border-radius: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+
+.talk-list-item .hb-attachment-link:hover {
+  color: var(--color-primary-700, rgb(3 105 161));
+  background: rgb(244 244 245 / 70%);
+  border-color: var(--color-primary-400, rgb(56 189 248));
+}
+
+.dark .talk-list-item .hb-attachment-link {
+  color: rgb(212 212 216);
+  border-color: rgb(113 113 122 / 70%);
+}
+
+.dark .talk-list-item .hb-attachment-link:hover {
+  color: var(--color-primary-300, rgb(125 211 252));
+  background: rgb(39 39 42 / 75%);
+  border-color: var(--color-primary-500, rgb(14 165 233));
+}
+
+.talk-list-item .hb-attachment-link:focus-visible {
+  outline: 2px solid var(--color-primary-500, rgb(14 165 233));
+  outline-offset: 2px;
+}
+
+/* University-grouped course list. */
+.people-list-item {
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgb(24 24 27 / 10%);
+}
+
+.dark .people-list-item {
+  border-bottom-color: rgb(255 255 255 / 12%);
+}
+
+.course-list-item {
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgb(24 24 27 / 10%);
+}
+
+.dark .course-list-item {
+  border-bottom-color: rgb(255 255 255 / 12%);
+}
+
+.course-content-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.22rem 0.6rem;
+  color: rgb(63 63 70);
+  border: 1px solid rgb(161 161 170 / 55%);
+  border-radius: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+
+.course-content-link:hover {
+  color: var(--color-primary-700, rgb(3 105 161));
+  background: rgb(244 244 245 / 70%);
+  border-color: var(--color-primary-400, rgb(56 189 248));
+}
+
+.dark .course-content-link {
+  color: rgb(212 212 216);
+  border-color: rgb(113 113 122 / 70%);
+}
+
+.dark .course-content-link:hover {
+  color: var(--color-primary-300, rgb(125 211 252));
+  background: rgb(39 39 42 / 75%);
+  border-color: var(--color-primary-500, rgb(14 165 233));
+}
+
+.course-content-link:focus-visible {
+  outline: 2px solid var(--color-primary-500, rgb(14 165 233));
+  outline-offset: 2px;
+}
+
+/* Compact, readable list layouts on phones. */
+@media (max-width: 640px) {
+  .publication-entry-row {
+    gap: 0.5rem;
+  }
+
+  .publication-entry-row::before {
+    flex-basis: 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .publication-entry-row .flex.flex-wrap,
+  .publication-detail-links,
+  .talk-links {
+    gap: 0.4rem;
+  }
+
+  :is(.publication-entry-row, .publication-detail-links, .collection-archive-action) .hb-attachment-link,
+  .talk-list-item .hb-attachment-link,
+  .course-content-link {
+    min-height: 2rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .talk-list-item time {
+    align-self: flex-start;
+  }
+
+  .talk-list-item h3,
+  .course-list-item h3,
+  .people-list-item h3 {
+    overflow-wrap: anywhere;
+  }
+
+  .people-group,
+  .course-university {
+    margin-bottom: 2rem;
+  }
+
+  .people-group > h2,
+  .course-university > h2 {
+    font-size: 1.35rem;
+  }
+}
+
+/* Native CV viewer, using the same quiet framing as other academic content. */
+.cv-pdf-viewer {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 12rem);
+  min-height: 42rem;
+  background: white;
+  border: 1px solid rgb(24 24 27 / 12%);
+  border-radius: 0.5rem;
+}
+
+.dark .cv-pdf-viewer {
+  border-color: rgb(255 255 255 / 14%);
+}
+
+.cv-pdf-actions .hb-attachment-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid rgb(161 161 170 / 55%);
+  border-radius: 0.35rem;
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .cv-pdf-viewer {
+    height: 75vh;
+    min-height: 30rem;
+  }
+}

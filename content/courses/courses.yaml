@@ -1,0 +1,42 @@
+universities:
+  - name: "École Polytechnique"
+    courses:
+      - title: "Statistics and Probability Refresher"
+        period: "2025-2026"
+        level: "M2 Data Science"
+        hours: "24 h (eq. CM)"
+        role: "Instructor"
+        description: "A refresher course covering measure theory, random variables, modes of convergence, parametric statistical models, point estimation, optimality, and hypothesis testing."
+        page: 
+
+  - name: "CentraleSupélec"
+    courses:
+      - title: "Programming with Python"
+        period: "2025"
+        level: "M2 Executive Education"
+        hours: "24 h (eq. CM)"
+        role: "Instructor"
+        description: "An interactive Python programming course for machine learning, combining practical exercises and live-coding sessions."
+
+  - name: "ENS Paris-Saclay"
+    courses:
+      - title: "Introduction to Statistics and Machine Learning"
+        period: "2021–2024"
+        level: "M1"
+        hours: "66 h (eq. TD)"
+        role: "Teaching assistant"
+        description: "Exercises and coding workshops covering statistical estimation, optimality, hypothesis testing, linear models, generalization bounds, and support vector machines."
+
+      - title: "Agrégation de Mathématiques — Probability and Statistics (Option A)"
+        period: "2021–2024"
+        level: "M2 / Agrégation"
+        hours: "70 h (eq. TD)"
+        role: "Teaching assistant and mock-examination jury member"
+        description: "Practical sessions on sampling, convergence, estimation, linear models, and hypothesis testing, together with mock oral examinations."
+
+      - title: "Introduction to Measure Theory and Probability"
+        period: "2022"
+        level: "L3"
+        hours: "14 h (eq. TD)"
+        role: "Teaching assistant"
+        description: "Practical sessions covering random variables, modes of convergence, and conditional expectations."

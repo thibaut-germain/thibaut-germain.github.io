@@ -1,0 +1,96 @@
+talks:
+  - title: "Shape and operator embeddings of sequential data for machine learning"
+    date: 2025-11-01
+    event: "MALT seminar"
+    location: "Inria Rennes"
+    links: []
+
+  - title: "Spectral-Grassmann Wasserstein metric for operator representations of dynamical systems"
+    date: 2025-10-01
+    event: "MIND seminar"
+    location: "Inria Saclay"
+    links: []
+
+  - title: "Invariances and shape embedding for time series machine learning"
+    date: 2025-05-01
+    event: "EDF R&D"
+    links: []
+
+  - title: "Detection and statistical analysis of temporal pattern"
+    date: 2025-01-28
+    event: "R&D Cognition Day"
+    links:
+      - type: link
+        name: Event
+        url: https://www.institut-cognition.com/journees-rt-cognition-28-janvier-2025/
+
+  - title: "Interactive discovery of temporal motifs, a web application"
+    date: 2024-09-01
+    event: "ECML PKDD 2024"
+    links:
+      - type: link
+        name: Event
+        url: https://ecmlpkdd.org/2024/
+
+  - title: "Shape analysis & machine learning for time series"
+    date: 2024-07-01
+    event: "Duke University"
+    links:
+      - type: slides
+        name: Slides
+        file: Duke_visiting.pdf
+      - type: link
+        name: Duke University
+        url: https://duke.edu/
+
+  - title: "Persistence-based Motifs Discovery in Time Series"
+    date: 2024-06-25
+    event: "Centre Borelli — MLDMA seminar"
+    links:
+      - type: slides
+        name: Slides
+        file: MLDMA_25_06_2024.pdf
+      - type: link
+        name: Centre Borelli
+        url: https://centreborelli.ens-paris-saclay.fr/en
+
+  - title: "Linear-trend normalization for multivariate subsequence similarity search"
+    date: 2024-05-01
+    event: "ICDE 2024"
+    links:
+      - type: slides
+        name: Slides
+        file: ICDE2024_lt_distance.pdf
+      - type: link
+        name: Event
+        url: https://icde2024.github.io/
+
+  - title: "Interpretable classification of ventilation behaviors based on machine learning"
+    date: 2023-01-01
+    event: "Integrative Neuroscience and Cognition Center (INCC)"
+    links:
+      - type: link
+        name: Event
+        url: https://incc-paris.fr/events/interpretable-classification-of-ventilation-behaviors-based-on-machine-learning-by-eric-krejci-and-thibaut-germain/
+
+  - title: "Une méthode de regroupement des comportements respiratoires basée sur des distances DTW entre séries temporelles & Comment les nouveaux outils permettent de redécouvrir des données ?"
+    date: 2022-12-01
+    event: "Centre Borelli — Séminaire M&Ms"
+    links:
+      - type: link
+        name: Event
+        url: https://centreborelli.ens-paris-saclay.fr/fr/agenda/seminaire-mms-thibaut-germain-eric-krejci
+
+  - title: "Unsupervised study of plethysmography signals through DTW clustering"
+    date: 2022-07-01
+    event: "EMBC 2022"
+    links:
+      - type: poster
+        name: Poster
+        file: EBMC_Presentation.pdf
+      - type: link
+        name: Event
+        url: https://embc.embs.org/2022/
+
+# Local files are stored in content/talks/supports/.
+# Supported types include slides, poster, pdf, and link.

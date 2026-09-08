@@ -1,0 +1,30 @@
+students:
+  - name: "Sami Chemlal"
+    program: "M1 CentraleSupélec"
+    period: "Apr–Sep 2026"
+    co_supervisors:
+      - name: "Rémi Flamary"
+        website: "https://remi.flamary.com"
+      - name: "Karim Lounici"
+        website: "https://klounici.github.io"
+    topic: "Multitask and dictionary learning for conditional expectation operator learning"
+
+  - name: "Valerio Guerrini"
+    program: "M2 MVA"
+    period: "Apr–Sep 2024"
+    co_supervisors:
+      - name: "Charles Truong"
+        website: "https://charles.doffy.net/"
+      - name: "Laurent Oudre"
+        website: "https://laurentoudre.fr/"
+    topic: "A benchmark for discovering recurrent patterns in time series"
+
+  - name: "Lucas Haubert"
+    program: "M2 MVA"
+    period: "Apr–Sep 2024"
+    co_supervisors:
+      - name: "Chrysoula Kosma"
+        website: "https://sissykosm.github.io/"
+      - name: "Laurent Oudre"
+        website: "https://laurentoudre.fr/"
+    topic: "Shape-based loss functions for deep learning on time series"

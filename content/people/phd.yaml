@@ -1,0 +1,9 @@
+students:
+  - name: "Valerio Guerrini"
+    period: "2024–2027"
+    co_supervisors:
+      - name: "Charles Truong"
+        website: "https://charles.doffy.net/"
+      - name: "Laurent Oudre"
+        website: "https://laurentoudre.fr/"
+    topic: "Unsupervised approaches for constructing semantic summaries from physiological signals. Application to behavior analysis"

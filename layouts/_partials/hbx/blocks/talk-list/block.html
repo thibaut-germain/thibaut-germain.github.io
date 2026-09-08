@@ -1,0 +1,86 @@
+{{/* Chronological talk list backed by content/talks/talks.yaml. */}}
+{{ $page := .wcPage }}
+{{ $content := .wcBlock.content }}
+{{ $talk_data := $page.Resources.GetMatch "talks.yaml" }}
+{{ $talks := slice }}
+
+{{ with $talk_data }}
+  {{ $parsed := . | transform.Unmarshal }}
+  {{ with $parsed.talks }}
+    {{ $talks = sort . "date" "desc" }}
+  {{ end }}
+{{ end }}
+
+{{ with $content.title }}
+  <div class="flex flex-col items-center max-w-prose mx-auto justify-center px-6 md:px-0">
+    <h1 class="mb-0 text-3xl font-bold text-gray-900 dark:text-white">
+      {{ . | emojify | $page.RenderString }}
+    </h1>
+  </div>
+{{ end }}
+
+<div class="talk-list container mx-auto max-w-screen-lg px-4 sm:px-6 xl:px-5 pt-6 pb-5 lg:pb-8">
+  {{ if eq (len $talks) 0 }}
+    <p class="text-center text-gray-600 dark:text-gray-400">No talks yet.</p>
+  {{ else }}
+    {{ range $talks }}
+      {{ $month_year := (time .date).Format "Jan 2006" }}
+
+      <article class="talk-list-item w-full flex flex-col items-start gap-2 sm:flex-row sm:gap-4">
+        <time
+          datetime="{{ .date }}"
+          class="flex-shrink-0 text-sm font-mono text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 px-3 py-1 rounded-full"
+        >{{ $month_year }}</time>
+
+        <div class="min-w-0 flex-1">
+          <h3 class="font-semibold leading-snug text-zinc-900 dark:text-zinc-100">{{ .title }}</h3>
+
+          {{ if or .event .location }}
+            <div class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              {{ with .event }}<em>{{ . }}</em>{{ end }}{{ if and .event .location }}, {{ end }}{{ with .location }}{{ . }}{{ end }}
+            </div>
+          {{ end }}
+
+          {{ with .links }}
+            <div class="talk-links flex flex-wrap gap-2 mt-2">
+              {{ range . }}
+                {{ $href := .url | default "" }}
+                {{ $type := lower (.type | default "link") }}
+                {{ $label := .name | default (title $type) }}
+                {{ $icon := "link" }}
+
+                {{ if eq $type "link" }}
+                  {{ $label = "Link" }}
+                {{ else if eq $type "slides" }}
+                  {{ $icon = "presentation-chart-bar" }}
+                  {{ $label = "Slides" }}
+                {{ else if eq $type "poster" }}
+                  {{ $icon = "photo" }}
+                  {{ $label = "Poster" }}
+                {{ else if eq $type "pdf" }}
+                  {{ $icon = "document" }}
+                  {{ $label = "PDF" }}
+                {{ end }}
+
+                {{ if .file }}
+                  {{ with $page.Resources.GetMatch (printf "supports/%s" .file) }}
+                    {{ $href = .RelPermalink }}
+                  {{ end }}
+                {{ end }}
+
+                {{ if $href }}
+                  <a href="{{ $href | safeURL }}"
+                     class="hb-attachment-link hb-attachment-link-small"
+                     {{ if .url }}target="_blank" rel="noopener"{{ end }}>
+                    {{ partial "functions/get_icon" (dict "name" $icon "attributes" "style=\"height: 1em; width: 1em;\" class=\"inline-block\"") }}
+                    {{ $label }}
+                  </a>
+                {{ end }}
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </article>
+    {{ end }}
+  {{ end }}
+</div>

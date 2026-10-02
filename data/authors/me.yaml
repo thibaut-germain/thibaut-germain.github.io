@@ -41,9 +41,10 @@ links:
     url: https://orcid.org/0009-0002-4687-0581
 
 news:
+  - date: Sep 2026
+    text: "New preprint on [Multi-Task Learning of Conditional Mean Operators](https://arxiv.org/abs/2609.35429)."
   - date: Jun 2026
     text: "New preprint on [Dictionary Learning for Dynamical Systems](https://arxiv.org/abs/2605.18276)."
   - date: Jun 2026
     text: "Invited speaker at [New Trends in Statistical Learning 2026](https://sites.google.com/view/workshop-statsml/new-trends-in-sl-vi))."
-  - date: Feb 2026
-    text: "Paper accepted at [ICLR 2026](https://proceedings.iclr.cc/paper_files/paper/2026/hash/c256585cb41de955198b9268cdc480d4-Abstract-Conference.html)."
+  

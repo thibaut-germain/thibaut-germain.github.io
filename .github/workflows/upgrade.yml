@@ -34,6 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
+          ref: master
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -92,7 +93,7 @@ jobs:
             - [ ] Merge this PR to apply the updates.
           branch: "chore/upgrade-hugoblox-${{ github.run_id }}"
           delete-branch: true
-          base: main
+          base: master
           labels: |
             dependencies
             automated-pr

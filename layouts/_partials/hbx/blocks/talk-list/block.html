@@ -51,6 +51,10 @@
 
                 {{ if eq $type "link" }}
                   {{ $label = "Link" }}
+                  {{ if eq (lower (.name | default "")) "video" }}
+                    {{ $label = "Video" }}
+                    {{ $icon = "video-camera" }}
+                  {{ end }}
                 {{ else if eq $type "slides" }}
                   {{ $icon = "presentation-chart-bar" }}
                   {{ $label = "Slides" }}

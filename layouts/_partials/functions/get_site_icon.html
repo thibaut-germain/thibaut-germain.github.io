@@ -1,8 +1,9 @@
 {{/* Shared resource for browser tabs, Apple touch icons, and social images. */}}
-{{ $size := . | default 32 }}
+{{ $size := math.Max (. | default 32) 64 | int }}
 {{ $result := dict "resource" nil "type" "" "is_svg" false }}
 {{ with resources.Get "media/icon.png" }}
-  {{ $icon := .Resize (printf "%dx%d" $size $size) | fingerprint }}
+  {{/* Stable URLs let search engines refresh the icon without rediscovering it. */}}
+  {{ $icon := .Resize (printf "%dx%d" $size $size) | resources.Copy (printf "media/site-icon-%d.png" $size) }}
   {{ $result = dict "resource" $icon "type" "image/png" "is_svg" false }}
 {{ else }}
   {{ with resources.Get "media/icon.svg" }}

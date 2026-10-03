@@ -1,24 +1,92 @@
 talks:
+  - title: "Dictionary Learning of Dynamical Systems with Optimal Transport"
+    date: 2026-06-27
+    event: "New Trends in Statistical Learning 2026"
+    location: "Porquerolles"
+    links: 
+      - type: slides
+        name: Slides
+        file: NTSL_VI_Thibaut_Germain.pdf
+      - type: link
+        name: Event
+        url: https://sites.google.com/view/workshop-statsml/new-trends-in-sl-vi
+
+  - title: "Dictionary Learning of Dynamical Systems with Optimal Transport"
+    date: 2026-06-18
+    event: "Machine Learning and Dynamical System Seminar"
+    location: "Online"
+    links: 
+      - type: slides
+        name: Slides
+        file: doodl_TI.pdf
+      - type: link
+        name: Video
+        url: https://www.youtube.com/watch?v=wDvV9xpN_oA
+        
+  - title: "Shape-based embeddings of time series"
+    date: 2026-03-13
+    event: "L2S Seminar"
+    location: "CentralSupélec"
+    links: 
+      - type: slides
+        name: Slides
+        file: L2S_TSLDDMM.pdf
+     
+  - title: "Comparing dynamical systems with Optimal Transport"
+    date: 2026-02-19
+    event: "CSD seminar"
+    location: "ENS Ulm"
+    links: 
+      - type: slides
+        name: Slides
+        file: compare_ds_ulm.pdf
+      - type: link
+        name: Event
+        url: https://csd.ens.psl.eu/?csd-seminar-webpage
+
+  - title: "Comparing dynamical systems with Optimal Transport"
+    date: 2026-01-22
+    event: "SGM seminar"
+    location: "Ecole Polytechnique"
+    links: 
+      - type: slides
+        name: Slides
+        file: compare_ds_cmap.pdf
+      - type: link
+        name: Event
+        url: https://simpas-cmap.github.io
+
   - title: "Shape and operator embeddings of sequential data for machine learning"
     date: 2025-11-01
     event: "MALT seminar"
     location: "Inria Rennes"
-    links: []
+    links:
+      - type: slides
+        name: Slides
+        file: malt_seminar.pdf
 
   - title: "Spectral-Grassmann Wasserstein metric for operator representations of dynamical systems"
     date: 2025-10-01
     event: "MIND seminar"
     location: "Inria Saclay"
-    links: []
+    links: 
+      - type: slides
+        name: Slides
+        file: mind_seminar.pdf
 
   - title: "Invariances and shape embedding for time series machine learning"
     date: 2025-05-01
     event: "EDF R&D"
-    links: []
+    location: "Paris, France"
+    links: 
+      - type: slides
+        name: Slides
+        file: Prez_edf.pdf
 
   - title: "Detection and statistical analysis of temporal pattern"
     date: 2025-01-28
     event: "R&D Cognition Day"
+    location: "Paris, France"
     links:
       - type: link
         name: Event
@@ -85,8 +153,8 @@ talks:
     date: 2022-07-01
     event: "EMBC 2022"
     links:
-      - type: poster
-        name: Poster
+      - type: slides
+        name: Slides
         file: EBMC_Presentation.pdf
       - type: link
         name: Event

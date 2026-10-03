@@ -1,0 +1,11 @@
+{{/* Standalone slides use the same helper as the theme site head. */}}
+{{ $icon := partial "functions/get_site_icon" 32 }}
+{{ with $icon.resource }}
+  <link rel="icon" type="{{ $icon.type }}" href="{{ .RelPermalink }}" />
+{{ end }}
+{{ $apple := partial "functions/get_site_icon" 180 }}
+{{ if not $apple.is_svg }}
+  {{ with $apple.resource }}
+    <link rel="apple-touch-icon" type="image/png" href="{{ .RelPermalink }}" />
+  {{ end }}
+{{ end }}

@@ -1,0 +1,12 @@
+{{/* Shared resource for browser tabs, Apple touch icons, and social images. */}}
+{{ $size := . | default 32 }}
+{{ $result := dict "resource" nil "type" "" "is_svg" false }}
+{{ with resources.Get "media/icon.png" }}
+  {{ $icon := .Resize (printf "%dx%d" $size $size) | fingerprint }}
+  {{ $result = dict "resource" $icon "type" "image/png" "is_svg" false }}
+{{ else }}
+  {{ with resources.Get "media/icon.svg" }}
+    {{ $result = dict "resource" (. | fingerprint) "type" "image/svg+xml" "is_svg" true }}
+  {{ end }}
+{{ end }}
+{{ return $result }}

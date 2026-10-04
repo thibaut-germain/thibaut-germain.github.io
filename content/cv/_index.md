@@ -7,5 +7,5 @@ sections:
   - block: cv-pdf
     content:
       title: Curriculum Vitae
-      file: cnrs_cv_eng.pdf
+      file: resume.pdf
 ---

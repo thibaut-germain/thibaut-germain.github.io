@@ -21,7 +21,7 @@ main:
     url: people/ 
     weight: 50
   - name: CV
-    url: /cv/cnrs_cv_eng.pdf
+    url: /cv/
     weight: 60
 
 
